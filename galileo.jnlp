@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="http://NOEMA2-W12.ASL-11.IT:8080/webmed/Applet/" href="galileo.jnlp" >
+  <information>
+    <title> NOEMALIFE Galileo </title>
+    <vendor> NOEMALIFE GmbH </vendor>
+    <description> NOEMALIFE Galileo </description>
+	<icon href="images/galileo.jpg" kind="splash"/> 
+  </information>
+  <security>
+      <all-permissions/>
+  </security>
+  <resources>
+  	<!--
+  	See EHS-13287 and linked issues in case of double JRE startup.
+  	-->
+	<j2se version="1.6+" java-vm-args="-Xmx384m -XX:MaxPermSize=256m"/>
+	
+	<property name="jnlp.packEnabled"  value="false"/>
+	<property name="jnlp.SERVLET_BASE" value="http://NOEMA2-W12.ASL-11.IT:8080/webmed/SCart/"/>   
+	<property name="jnlp.LICENSE_KEY" value="nexus:2222222"/> 
+	<property name="jnlp.LANG1" value="DE"/> 
+	<property name="jnlp.LANG2" value="GB"/> 
+	<property name="jnlp.LANG3" value="FR"/> 
+	<property name="jnlp.LANG4" value="NL"/> 
+	<property name="jnlp.LANG5" value="ES"/> 
+	<property name="jnlp.LANG6" value="US"/> 
+	<property name="jnlp.LANG7" value="IT"/> 
+	<property name="jnlp.LANG_COUNT" value="7"/> 
+	<property name="jnlp.FORM_CACHE" value="6"/> 
+	<property name="jnlp.DEF_LANG" value="IT"/> 
+	<property name="jnlp.CODE_BASE" value="http://NOEMA2-W12.ASL-11.IT:8080/webmed/Applet/"/> 
+	<property name="jnlp.LOG4J_CONF" value="log4jDefault.xml"/> 
+	<property name="jnlp.LOGGER" value="ehealth.general"/>
+	<property name="jnlp.javax.ws.rs.ext.RuntimeDelegate" value="org.jboss.resteasy.spi.ResteasyProviderFactory" />
+	<property name="URL_BASE" value="http://NOEMA2-W12.ASL-11.IT:8080/webmed/" />
+
+	<jar href="galileo-1.5.4.jar" download="eager" main="true"/>
+	<jar href="JExplorerFull-1.5.4.jar" download="lazy"/>
+	<nativelib href="sigardll-1.5.4.jar" />
+	
+	<extension name="libraries" href="galileo-libs.jnlp"/>
+	<extension name="resources" href="galileo-resources.jnlp"/>
+	<extension name="formpackages" href="formpackages.jnlp"/>
+	<extension name="modules" href="galileo-modules-libs.jnlp"/>
+	<extension name="unsigned" href="galileo-modules-libs-unsigned.jnlp"/>
+   </resources>	
+	
+  <application-desc main-class="de.gmdnet.webmed.galileo.GalileoMain" />
+  <!-- To speed up the application startup, uncomment the following line: this would launch the application
+  before any updated jar (if present) is downloaded. This means that the modification will be available only the
+   next time the application is started-->
+  <!--update check="background" /-->
+</jnlp> 
