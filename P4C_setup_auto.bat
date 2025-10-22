@@ -82,6 +82,25 @@ REM Configura anche le impostazioni di sicurezza per Java Control Panel
 reg add "HKCU\SOFTWARE\JavaSoft\Java Runtime Environment\1.8" /v "ExceptionSiteList" /t REG_SZ /d "https://c4c.cee-psn.asi-1.i.it;https://c4c.cce.asl-11.it" /f
 reg add "HKCU\SOFTWARE\JavaSoft\Java Runtime Environment\1.6" /v "ExceptionSiteList" /t REG_SZ /d "https://c4c.cee-psn.asi-1.i.it;https://c4c.cce.asl-11.it" /f
 
+REM === CONFIGURAZIONE MICROSOFT EDGE - DISABILITA RICARICAMENTO MODALITA' IE ===
+REM Disabilita il ricaricamento automatico dei siti in modalità Internet Explorer
+REM Policy: "Consenti il ricaricamento dei siti in modalità Internet Explorer" impostata su "Non consentire"
+echo.
+echo [CONFIG EDGE] Disabilitazione ricaricamento siti in modalita IE...
+
+REM Crea le chiavi di policy di Edge se non esistono
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /f 2>nul
+reg add "HKCU\SOFTWARE\Policies\Microsoft\Edge" /f 2>nul
+
+REM Disabilita il ricaricamento in modalità IE (valore 0 = Non consentire)
+REM HKLM = per tutti gli utenti del computer (richiede privilegi amministrativi)
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v "InternetExplorerIntegrationReloadInIEModeAllowed" /t REG_DWORD /d 0 /f 2>nul
+
+REM HKCU = per l'utente corrente (non richiede privilegi amministrativi)
+reg add "HKCU\SOFTWARE\Policies\Microsoft\Edge" /v "InternetExplorerIntegrationReloadInIEModeAllowed" /t REG_DWORD /d 0 /f
+
+echo   [OK] Ricaricamento siti in modalita IE disabilitato per Edge
+
 REM Abilita il pannello di controllo Java per permettere modifiche manuali
 reg add "HKCU\SOFTWARE\JavaSoft\DeploymentProperties" /v "deployment.control.panel.suppress" /t REG_SZ /d "false" /f
 reg add "HKCU\SOFTWARE\JavaSoft\DeploymentProperties" /v "deployment.security.level" /t REG_SZ /d "MEDIUM" /f
@@ -324,4 +343,5 @@ REM )
 endlocal
 --
 REM jre-8u121-windows-i586.exe /s INSTALLDIR="C:\Program Files (x86)\Java\jre1.8.0_121" AUTO_UPDATE=0 EULA=1 REBOOT=0 SPONSORS=0
+--
 --
